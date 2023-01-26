@@ -7,9 +7,9 @@ import { users } from './context'
 const App = () => {
     return (
         <>
-            <users.UserProvider>
+            <users.UsersProvider>
                 <RouterProvider router={router} />
-            </users.UserProvider>
+            </users.UsersProvider>
         </>
     )
 }
