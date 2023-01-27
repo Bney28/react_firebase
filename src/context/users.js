@@ -35,7 +35,7 @@ export const UsersProvider = ({ children }) => {
     }
 
     const state = { data, error, isLoading }
-    const dispatchers = { getData, deleteUser }
+    const dispatchers = { getData, deleteUser, sendUser }
 
     return (
         <>

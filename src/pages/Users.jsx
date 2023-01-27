@@ -1,10 +1,11 @@
 import React from 'react'
-import GetUsers from '../conainters/GetUsers'
+import { CreateUser, GetUsers } from '../conainters'
 
 const Users = () => {
   return (
     <>
       <div>Users</div>
+      <CreateUser />
       <GetUsers />
     </>
   )

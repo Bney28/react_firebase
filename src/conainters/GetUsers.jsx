@@ -16,10 +16,12 @@ const GetUsers = () => {
 
   return (
     <>
-      <div>GetUser</div>
-      <UserList list={data} />
-      <p>error: {error}</p>
-      <p>cargando: {String(isLoading)} </p>
+      <div className="p-3">
+        <div>GetUser</div>
+        <UserList list={data} />
+        <p>error: {error}</p>
+        <p>cargando: {String(isLoading)} </p>
+      </div>
     </>
   )
 }
