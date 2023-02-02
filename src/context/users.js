@@ -10,6 +10,9 @@ export const UsersProvider = ({ children }) => {
     const [error, setError] = useState("")
     const [isLoading, setIsLoading] = useState(false)
 
+    const [errorCreateUser, setErrorCreateUser] = useState("")
+    const [isLoadingCreateUser, setIsLoadingCreateUser] = useState(false)
+
     const getData = async () => {
         try {
             setData(null)
@@ -34,7 +37,22 @@ export const UsersProvider = ({ children }) => {
         }
     }
 
-    const state = { data, error, isLoading }
+    const sendUser = async (newUser) => {
+        try {
+            setIsLoadingCreateUser(true)
+            await usersApi.createUser(newUser)
+            setIsLoadingCreateUser(false)
+            await getData()
+        } catch (error) {
+            setIsLoadingCreateUser(false)
+            setErrorCreateUser(error.message)
+        }
+    }
+
+    const state = { 
+        usersList: {data, error, isLoading},
+        userCreate: {data: null, error: errorCreateUser, isLoading: isLoadingCreateUser}
+    }
     const dispatchers = { getData, deleteUser, sendUser }
 
     return (

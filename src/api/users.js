@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 const api = Axios.create({
-    baseURL: "http://localhost:3004"
+    baseURL: "http://localhost:3000"
 })
 
 export const getUsers = async () => {
