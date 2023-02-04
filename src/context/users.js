@@ -9,9 +9,13 @@ export const UsersProvider = ({ children }) => {
     const [data, setData] = useState(null)
     const [error, setError] = useState("")
     const [isLoading, setIsLoading] = useState(false)
+    const [currentUser, setCurrentUser] = useState({
+        username: "init @username",
+        name: "init name",
+        age: "init age"
+    }
 
-    const [errorCreateUser, setErrorCreateUser] = useState("")
-    const [isLoadingCreateUser, setIsLoadingCreateUser] = useState(false)
+    )
 
     const getData = async () => {
         try {
@@ -26,22 +30,44 @@ export const UsersProvider = ({ children }) => {
         }
     }
 
-    const deleteUser = async (userId) => {
+    const sendUser = async (userData) => {
         try {
             setIsLoading(true)
-            await usersApi.deleteUser(userId)
+
+            if (userData.id) {
+                await usersApi.updateUser(userData.id, userData)
+            } else {
+                await usersApi.createUser(userData)
+            }
+
             setIsLoading(false)
+            await getData()
+
         } catch (error) {
             setIsLoading(false)
             setError(error.message)
         }
     }
 
-    const sendUser = async (newUser) => {
+
+    const getUserDetails = async (id) => {
         try {
-            setData(null)
             setIsLoading(true)
-            await usersApi.createUser(newUser)
+            const res = await usersApi.getUserDetails(id)
+            setCurrentUser(res.data)
+            console.log(res.data);
+            setIsLoading(false)
+
+        } catch (error) {
+            setIsLoading(false)
+            setError(error.message)
+        }
+    }
+
+    const deleteUser = async (userId) => {
+        try {
+            setIsLoading(true)
+            await usersApi.deleteUser(userId)
             setIsLoading(false)
             await getData()
         } catch (error) {
@@ -50,8 +76,9 @@ export const UsersProvider = ({ children }) => {
         }
     }
 
-    const state = { data, error, isLoading }
-    const dispatchers = { getData, deleteUser, sendUser }
+
+    const state = { data, error, isLoading, currentUser }
+    const dispatchers = { getData, deleteUser, sendUser, getUserDetails }
 
     return (
         <>

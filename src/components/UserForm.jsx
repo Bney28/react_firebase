@@ -1,27 +1,28 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useForm } from "react-hook-form";
-import { usersDispatcherContext } from '../context/users';
 
-const UserForm = () => {
+const UserForm = ({initialValues, sendUser}) => {
 
-    const { register, handleSubmit, resetField, formState: { errors } } = useForm()
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({
+        values: initialValues
+    })
 
-    const { sendUser } = useContext(usersDispatcherContext)
+    const handleReset = ()  => {
+        return{
+            username:"",
+            name: "",
+            age: ""
+        }
+    }
 
     const sendForm = (data) => {
         sendUser(data)
 
         console.log(data)
-
-        resetField('id')
-        resetField('userName')
-        resetField('name')
-        resetField('age')
+        reset(handleReset)
     }
 
-
-
-
+    
     return (
         <>
             <div className="container">
@@ -39,7 +40,8 @@ const UserForm = () => {
                                 placeholder="id"
                                 type="text"
                                 className="form-control mb-2"
-                                {...register("id", { required: true })}
+                                disabled
+                                {...register("id")}
                                 
                             />
                             {errors.id && <span className='error'>Por favor escribe tu Id único</span>}

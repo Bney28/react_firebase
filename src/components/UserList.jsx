@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { users } from '../context'
 import UserCard from './UserCard'
 
 const UserList = ({ list }) => {
+
+  const { deleteUser } = useContext(users.usersDispatcherContext)
+
   return (
     <>
 
@@ -18,6 +22,7 @@ const UserList = ({ list }) => {
                 username={e.username}
                 name={e.name}
                 id={e.id}
+                deleteUser={deleteUser}
               />
             )
           })
