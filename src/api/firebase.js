@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
 import { getFirestore, getDocs, collection, addDoc, deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
 
 // Your web app's Firebase configuration
@@ -17,6 +16,17 @@ const firebaseConfig = {
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig); //Esta función conecta con firebase
 const db = getFirestore(app)
+const auth = getAuth(app)
+
+const authProvider = new GoogleAuthProvider()
+
+export const login = async () => {
+  authProvider.setCustomParameters({ prompt: "select_account" })
+  const res = await signInWithPopup(auth, authProvider)
+  return res.user
+}
+
+export const logout = async () => await signOut(auth)
 
 const userCollection = collection(db, "users")
 
