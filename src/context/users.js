@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import { users as usersApi, firebase } from '../api'
+import { firebase } from '../api'
 
 export const usersContext = createContext()
 export const usersDispatcherContext = createContext()
