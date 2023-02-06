@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import { getFirestore, getDocs, collection } from "firebase/firestore";
+import { getFirestore, getDocs, collection, addDoc } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -18,9 +18,11 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig); //Esta función conecta con firebase
 const db = getFirestore(app)
 
+const userCollection = collection(db, "users")
+
 export const getData = async () => {
   //snapshot empaqueta los datos
-  const snapshot = await getDocs(collection(db, "users"))
+  const snapshot = await getDocs(userCollection)
   const data = []
 
   snapshot.forEach((doc) => {
@@ -30,4 +32,9 @@ export const getData = async () => {
   })
 
   return { data }
+}
+
+export const createUser = async ({username, name, age}) => {
+  await addDoc(userCollection, {username, name, age})
+  
 }
