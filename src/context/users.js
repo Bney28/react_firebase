@@ -36,7 +36,7 @@ export const UsersProvider = ({ children }) => {
             setIsLoading(true)
 
             if (userData.id) {
-                await usersApi.updateUser(userData.id, userData)
+                await firebase.updateUser(userData.id, userData)
             } else {
                 await firebase.createUser(userData)
             }
@@ -54,7 +54,7 @@ export const UsersProvider = ({ children }) => {
     const getUserDetails = async (id) => {
         try {
             setIsLoading(true)
-            const res = await usersApi.getUserDetails(id)
+            const res = await firebase.getUserDetails(id)
             setCurrentUser(res.data)
             console.log(res.data);
             setIsLoading(false)
