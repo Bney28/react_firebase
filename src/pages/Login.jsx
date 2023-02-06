@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { firebase } from '../api'
+import { auth } from '../context'
+
 
 const Login = () => {
 
-    const [user, setUser] = useState()
+    const { user, setUser } = useContext(auth.authContext)
 
     const handleClick = async () => {
         const _user = await firebase.login()
