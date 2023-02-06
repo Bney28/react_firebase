@@ -1,4 +1,4 @@
 import * as users from './users'
-import firebase from './firebase'
+import * as firebase from './firebase'
 
 export { users, firebase }
