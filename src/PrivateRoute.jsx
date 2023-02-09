@@ -17,7 +17,6 @@ const PrivateRoute = () => {
                     <>
                         <Navigate to="/login" />
                         {console.log("No estás logueado")}
-                        <p>Hey! Logueate primero</p>
                     </>
                 )
             }

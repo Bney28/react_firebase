@@ -1,7 +1,7 @@
 import React from 'react'
 import { Home, Users, Login } from "./pages"
 import { Navbar } from './layout'
-import { createBrowserRouter, createRoutesFromElements, Outlet, Route } from 'react-router-dom'
+import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
 
 

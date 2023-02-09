@@ -1,13 +1,33 @@
+import { onAuthStateChanged } from "firebase/auth";
 import { createContext, useState } from "react";
+import { firebase } from "../api";
+
+
 
 export const authContext = createContext()
 
-export const AuthProvider = (props) =>{
-    
+export const AuthProvider = (props) => {
+
     const [user, setUser] = useState()
 
-    return(
-        <authContext.Provider value={{user, setUser}}>
+    onAuthStateChanged(firebase.auth, (_user) => {
+
+        if (_user) {
+            console.log(_user)
+            firebase.createUser({
+                username: _user.email,
+                name: _user.displayName,
+                age: _user.photoURL
+            })
+
+            setUser(_user)
+        } else {
+            setUser(null)
+        }
+    })
+
+    return (
+        <authContext.Provider value={{ user }}>
             {props.children}
         </authContext.Provider>
     )
