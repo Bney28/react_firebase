@@ -1,5 +1,5 @@
 import React from 'react'
-import { CreateUser, GetUsers } from '../conainters'
+import { CreateUser, GetUsers } from '../containers'
 
 const Users = () => {
   return (

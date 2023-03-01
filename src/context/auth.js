@@ -2,8 +2,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import { createContext, useState } from "react";
 import { firebase } from "../api";
 
-
-
 export const authContext = createContext()
 
 export const AuthProvider = (props) => {

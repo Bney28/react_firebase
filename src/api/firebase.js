@@ -18,6 +18,7 @@ export const app = initializeApp(firebaseConfig); //Esta función conecta con fi
 const db = getFirestore(app)
 export const auth = getAuth(app)
 
+//Login and Logout
 const authProvider = new GoogleAuthProvider()
 
 export const login = async () => {
@@ -28,6 +29,7 @@ export const login = async () => {
 
 export const logout = async () => await signOut(auth)
 
+//Otras funciones
 const userCollection = collection(db, "users")
 
 export const getData = async () => {
